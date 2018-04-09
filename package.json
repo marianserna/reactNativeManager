@@ -5,11 +5,14 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "ios": "npm run ios"
+    "ios": "react-native run-ios"
   },
   "dependencies": {
+    "firebase": "^4.12.1",
     "react": "16.3.1",
-    "react-native": "0.55.2"
+    "react-native": "0.55.2",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",
