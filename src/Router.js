@@ -1,13 +1,13 @@
 import React from 'react';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 
 import LoginForm from './components/LoginForm';
+import EmployeeCreate from './components/EmployeeCreate';
 import EmployeeList from './components/EmployeeList';
 
 const RouterComponent = () => {
   return (
     <Router>
-      {/* parent scene */}
       <Scene key="root" hideNavBar>
         <Scene key="auth">
           <Scene
@@ -17,11 +17,26 @@ const RouterComponent = () => {
             initial
           />
         </Scene>
+
         <Scene key="main">
+          {/* pass props to customize scene: rightTitle, onRight --> Text 'Right' appears in right of Header */}
+          {/* Whatever is first will be showed first. If you want, add the initial prop */}
           <Scene
+            rightTitle="Add"
+            onRight={() => {
+              // To navigate, use Actions.keyofthesceneiwanttonavigate
+              Actions.employeeCreate();
+            }}
             key="employeeList"
             component={EmployeeList}
             title="Employees"
+            initial
+          />
+
+          <Scene
+            key="employeeCreate"
+            component={EmployeeCreate}
+            title="Create Employee"
           />
         </Scene>
       </Scene>
