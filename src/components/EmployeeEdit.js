@@ -1,18 +1,13 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
+import Communications from 'react-native-communications';
 
 import { employeeUpdate, employeeSave } from '../actions';
 import { Card, CardSection, Button } from './common';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends React.Component {
-  // componentWillMount() {
-  //   this.props.employee.forEach(({ value, prop }) => {
-  //     this.props.employeeUpdate({ prop, value });
-  //   });
-  // }
-
   componentWillMount() {
     _.each(this.props.employee, (value, prop) => {
       this.props.employeeUpdate({ prop, value });
@@ -29,12 +24,22 @@ class EmployeeEdit extends React.Component {
     });
   };
 
+  onTextPress = () => {
+    const { phone, shift } = this.props;
+
+    Communications.text(phone, `Your upcoming shift is on ${shift}`);
+  };
+
   render() {
     return (
       <Card>
         <EmployeeForm />
         <CardSection>
           <Button onPress={this.onButtonPress}>Save Changes</Button>
+        </CardSection>
+
+        <CardSection>
+          <Button onPress={this.onTextPress}>Text Schedule</Button>
         </CardSection>
       </Card>
     );
